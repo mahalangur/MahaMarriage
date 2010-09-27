@@ -3,6 +3,7 @@
 # Sept 26, 2010
 
 import random
+from sys import exit
 
 def new_deck():
     """
@@ -34,7 +35,12 @@ print("Total Cards = %s cards" % len(cards_list))  # test
 # draw n cards per hand
 n = 21
 # draw the hands
-num_of_players = input("How many players do we have? ")
+num_of_players = input("How many players do we have? (1-6) ")
+# display error and exit game if invalid number of players
+if not ( num_of_players > 0 and num_of_players < 7):
+    print("Number of players must be 1-6!")
+    exit()
+
 for i in range(0, num_of_players):
     hand[i] = draw_cards(n, cards_list)
 
