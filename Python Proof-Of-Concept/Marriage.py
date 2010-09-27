@@ -2,8 +2,8 @@
 # OldMaven
 # Sept 26, 2010
 
-import random
 from sys import exit
+from random import shuffle
 
 def new_deck():
     """
@@ -23,7 +23,7 @@ def draw_cards(n, cards_list):
     since object cards_list is by reference, it will change too
     return a list of n cards
     """
-    random.shuffle(cards_list)
+    shuffle(cards_list)
     return [cards_list.pop() for k in range(n)]
 
 # new deck
