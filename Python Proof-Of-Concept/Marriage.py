@@ -49,7 +49,7 @@ print('-'*80)
 for j in range(0, num_of_players):
     print("hand[" + str(j) + "] = %s" % hand[j])
     #Sorts Hands in HAND!
-    print("handsorted[" + str(j) + "] = %s" % sorted(hand[j])
+    print("handsorted[" + str(j) + "] = %s" % sorted(hand[j]))
 print('-'*80)
 
 print("Remaining Cards = %s cards" % cards_list)
