@@ -1,57 +1,77 @@
-# Modified a Random Code off the internet for Marriage!
-# OldMaven
-# Sept 26, 2010
+# Implementation of Marriage card game in Python
+# Originally by Oldmaven
 
 from sys import exit
 from random import shuffle
 
-def new_deck():
-    """
-    create a deck of cards
-    suit: club=C, diamond=D, heart=H spade=S
-    rank: ace=A, 10=T, jack=J, queen=Q, king=K, numbers=2..9
-    ace of spade would be AS, 8 of heart would be 8H and so on
-    return a list of a full deck of cards
-    """
-    rs = [rank + suit for rank in "A23456789TJQK" for suit in "CDHS"]
-    return rs * 3
+class Marriage:
 
-def draw_cards(n, cards_list):
-    """
-    randomly draw n cards from the deck (cards_list)
-    remove those cards from the deck
-    since object cards_list is by reference, it will change too
-    return a list of n cards
-    """
-    shuffle(cards_list)
-    return [cards_list.pop() for k in range(n)]
+	def __init__(self, num_of_players):
+		self.num_of_players = num_of_players
+		self.hand = [0,0,0,0,0,0] # Six Players Max
+		rs = [rank + suit for rank in "A23456789TJQK" for suit in "CDHS"]
+		self.cards_list = rs * 3
 
-# new deck
-cards_list = new_deck()
-hand = [0,0,0,0,0,0] # Six Players Max
+	def print_deck(self):
+		print "Deck: %s" % self.cards_list
+		print "Total Cards = %s cards" % len(self.cards_list)
 
-print("3 Decks for Marriage = %s cards" % cards_list)
-print("Total Cards = %s cards" % len(cards_list))  # test
-# draw n cards per hand
-n = 21
-# draw the hands
-num_of_players = input("How many players do we have? (1-6) ")
+	def print_hands(self):
+		print '-' * 80
+		for j in range(0, self.num_of_players):
+			print "hand[" + str(j) + "] = %s" % self.hand[j]
+		print '-' * 80
+
+	def draw_cards(self):
+		"""
+		randomly draw n cards from the deck (cards_list)
+		remove those cards from the deck
+		since object cards_list is by reference, it will change too
+		return a list of n cards
+		"""
+		n = 21 
+		shuffle(self.cards_list)
+		return [self.cards_list.pop() for k in range(n)]
+
+	def draw_hands(self):
+		for i in range(0, self.num_of_players):
+			self.hand[i] = self.draw_cards()
+
+	def sort_hands(self):
+		for j in range(0, self.num_of_players):
+			self.hand[j] = sorted(self.hand[j])
+
 # display error and exit game if invalid number of players
+num_of_players = input("How many players do we have? (1-6) ")
 if not ( num_of_players > 0 and num_of_players < 7):
-    print("Number of players must be 1-6!")
+    print "Number of players must be 1-6!"
     exit()
 
-for i in range(0, num_of_players):
-    hand[i] = draw_cards(n, cards_list)
+# Create instance of Marriage class
+marriage = Marriage(num_of_players)
 
+# print current card deck
+print "\n"
+marriage.print_deck()
 
-print('-'*80)
-for j in range(0, num_of_players):
-    print("hand[" + str(j) + "] = %s" % hand[j])
-    #Sorts Hands in HAND!
-    print("handsorted[" + str(j) + "] = %s" % sorted(hand[j]))
-print('-'*80)
+# draw hands
+print "\n"
+print "Drawing hands........."
+marriage.draw_hands()
 
-print("Remaining Cards = %s cards" % cards_list)
-print("Remaining Cards = %s cards" % len(cards_list))  # test
+# print current card deck after drawing hand
+print "\n"
+marriage.print_deck()
 
+# print unsorted hands
+print "\n"
+print "Unsorted hands"
+marriage.print_hands()
+
+# sort hands
+marriage.sort_hands()
+
+# print sorted hands
+print "\n"
+print "Sorted hands"
+marriage.print_hands()
