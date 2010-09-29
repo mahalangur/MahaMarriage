@@ -7,6 +7,7 @@
 
 ## Bug reports or feature requests
 * Use Github [[issues|http://github.com/mahalangur/MahaMarriage/issues]].
+* Use Mahalangur [[support page|http://www.mahalangur.org/content/marriage-card-game-webapp]]
 
 ## Contributing if you have commit rights:
 * Clone the repository.
