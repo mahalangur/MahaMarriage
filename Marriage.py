@@ -41,37 +41,41 @@ class Marriage:
 		for j in range(0, self.num_of_players):
 			self.hand[j] = sorted(self.hand[j])
 
-# display error and exit game if invalid number of players
-num_of_players = input("How many players do we have? (1-6) ")
-if not ( num_of_players > 0 and num_of_players < 7):
-    print "Number of players must be 1-6!"
-    exit()
+def main():
+	# display error and exit game if invalid number of players
+	num_of_players = input("How many players do we have? (1-6) ")
+	if not ( num_of_players > 0 and num_of_players < 7):
+		print "Number of players must be 1-6!"
+		exit()
 
-# Create instance of Marriage class
-marriage = Marriage(num_of_players)
+	# Create instance of Marriage class
+	marriage = Marriage(num_of_players)
 
-# print current card deck
-print "\n"
-marriage.print_deck()
+	# print current card deck
+	print "\n"
+	marriage.print_deck()
 
-# draw hands
-print "\n"
-print "Drawing hands........."
-marriage.draw_hands()
+	# draw hands
+	print "\n"
+	print "Drawing hands........."
+	marriage.draw_hands()
 
-# print current card deck after drawing hand
-print "\n"
-marriage.print_deck()
+	# print current card deck after drawing hand
+	print "\n"
+	marriage.print_deck()
 
-# print unsorted hands
-print "\n"
-print "Unsorted hands"
-marriage.print_hands()
+	# print unsorted hands
+	print "\n"
+	print "Unsorted hands"
+	marriage.print_hands()
 
-# sort hands
-marriage.sort_hands()
+	# sort hands
+	marriage.sort_hands()
 
-# print sorted hands
-print "\n"
-print "Sorted hands"
-marriage.print_hands()
+	# print sorted hands
+	print "\n"
+	print "Sorted hands"
+	marriage.print_hands()
+
+if __name__ == '__main__':
+	main()
