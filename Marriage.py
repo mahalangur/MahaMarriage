@@ -9,7 +9,7 @@ class Marriage:
 	def __init__(self, num_of_players):
 		self.num_of_players = num_of_players
 		self.hand = [0,0,0,0,0,0] # Six Players Max
-		rs = [rank + suit for rank in "A23456789TJQK" for suit in "CDHS"]
+		rs = [suit + rank for suit in "CDHS" for rank in "A23456789TJQK"]
 		self.cards_list = rs * 3
 
 	def print_deck(self):
