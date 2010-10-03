@@ -30,7 +30,9 @@ class Marriage:
 		return a list of n cards
 		"""
 		n = 21 
-		shuffle(self.cards_list)
+		print '='*80
+		print self.cards_list
+		print '='*80
 		return [self.cards_list.pop() for k in range(n)]
 
 	def draw_hands(self):
