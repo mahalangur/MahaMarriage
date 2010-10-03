@@ -30,9 +30,6 @@ class Marriage:
 		return a list of n cards
 		"""
 		n = 21 
-		print '='*80
-		print self.cards_list
-		print '='*80
 		return [self.cards_list.pop() for k in range(n)]
 
 	def draw_hands(self):
@@ -59,12 +56,7 @@ def main():
 
 	# draw hands
 	print "\n"
-	print "Drawing hands........."
 	marriage.draw_hands()
-
-	# print current card deck after drawing hand
-	print "\n"
-	marriage.print_deck()
 
 	# print unsorted hands
 	print "\n"
@@ -78,6 +70,10 @@ def main():
 	print "\n"
 	print "Sorted hands"
 	marriage.print_hands()
+	
+	# print current card deck after drawing hand
+	print "\n"
+	marriage.print_deck()
 
 if __name__ == '__main__':
 	main()
