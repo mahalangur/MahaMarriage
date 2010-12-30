@@ -8,14 +8,74 @@ from random import shuffle
 cards_to_deal = 21
 max_players  = 6
 
-class Marriage:
-
+class Player:
+  def __init__():
+    self.cards = []
   
+  def addcard(card):
+    self.cards.append(card)
+  
+  def isRobot():
+    False
+
+class Card(object):
+  """represents a standard playing card."""
+  
+  suit_names = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
+  rank_names = [None, 'Ace', '2', '3', '4', '5', '6', '7','8', '9', '10', 'Jack', 'Queen', 'King']
+    
+  def __init__(self, suit=0, rank=2):
+    self.suit = suit 
+    self.rank = rank
+  
+  def __str__(self): 
+    return '%s of %s' % (Card.rank_names[self.rank], Card.suit_names[self.suit])
+    
+  def __cmp__(self, other):
+    t1 = self.suit, self.rank 
+    t2 = other.suit, other.rank 
+    return cmp(t1, t2)
+
+
+
+class Deck(object):
+  def __init__(self, times=1): 
+    self.cards = []
+    for suit in range(4): 
+      for rank in range(1, 14):
+        card = Card(suit, rank)
+        self.cards.append(card)
+    self.cards = self.cards * times
+    
+        
+  def move_cards(self, hand, num): 
+    for i in range(num):
+      hand.add_card(self.pop_card())
+            
+  def __str__(self):
+    res=[]
+    for card in self.cards:
+      res.append(str(card))
+    return '\n'.join(res)
+    
+  def pop_card(self):
+    return self.cards.pop()
+    
+  def add_card(self, card):
+    self.cards.append(card)
+    
+  def shuffle(self): 
+    shuffle(self.cards)
+
+class Hand(Deck):
+  def __init__(self): 
+    self.cards = []
+  
+class Marriage:
 	def __init__(self, num_of_players):
 		self.num_of_players = num_of_players
 		self.hand = [0]* num_of_players
-		rs = [suit + rank for suit in "CDHS" for rank in "A23456789TJQK"]
-		self.cards_list = rs * 3
+		self.cards_list = [suit + rank for suit in "CDHS" for rank in "A23456789TJQK"] * 3
 
 	def print_deck(self):
 		print "Deck: %s" % self.cards_list
