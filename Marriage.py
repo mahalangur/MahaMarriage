@@ -7,6 +7,7 @@ from random import shuffle
 #let them be global vars
 cards_to_deal = 21
 max_players  = 6
+number_of_decks = 3
 
 class Player:
   def __init__():
@@ -74,7 +75,7 @@ class Hand(Deck):
 class Marriage:
 	def __init__(self, num_of_players):
 		self.num_of_players = num_of_players
-		self.deck = Deck(3)
+		self.deck = Deck(number_of_decks)
 		self.hands = []
 		for i in range(num_of_players):
 		  self.hands.append(Hand())
