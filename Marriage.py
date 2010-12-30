@@ -74,36 +74,36 @@ class Hand(Deck):
 class Marriage:
 	def __init__(self, num_of_players):
 		self.num_of_players = num_of_players
-		self.hand = [0]* num_of_players
-		self.cards_list = [suit + rank for suit in "CDHS" for rank in "A23456789TJQK"] * 3
+		self.deck = Deck(3)
+		self.hands = []
+		for i in range(num_of_players):
+		  self.hands.append(Hand())
+		
 
 	def print_deck(self):
-		print "Deck: %s" % self.cards_list
-		print "Total Cards = %s cards" % len(self.cards_list)
+		print "Deck: %s" % self.deck
+		print "Total Cards = %s cards" % len(self.deck.cards)
 
 	def print_hands(self):
-		print '-' * 80
-		for j in range(0, self.num_of_players):
-			print "hand[" + str(j) + "] = %s" % self.hand[j]
-		print '-' * 80
+		for ahand in self.hands:
+		  print '-' * 80
+		  print ahand
+		  print '-' * 80
 
-	def draw_cards(self):
+	def draw_hands(self):
 		"""
 		randomly draw n cards from the deck (cards_list)
 		remove those cards from the deck
 		since object cards_list is by reference, it will change too
 		return a list of n cards
 		"""
-		shuffle(self.cards_list)
-		return [self.cards_list.pop() for k in range(cards_to_deal)]
-
-	def draw_hands(self):
-		for i in range(0, self.num_of_players):
-			self.hand[i] = self.draw_cards()
+		self.deck.shuffle()
+		for ahand in self.hands:
+		  self.deck.move_cards(ahand, cards_to_deal)
 
 	def sort_hands(self):
-		for j in range(0, self.num_of_players):
-			self.hand[j] = sorted(self.hand[j])
+	  for ahand in self.hands:
+	    ahand.cards = sorted(ahand.cards)
 
 def main():
 	# display error and exit game if invalid number of players
@@ -114,6 +114,9 @@ def main():
 
 	# Create instance of Marriage class
 	marriage = Marriage(num_of_players)
+	
+	print "\n"
+	print " %s hands created " % len(marriage.hands)
 
 	# print current card deck
 	print "\n"
@@ -127,6 +130,10 @@ def main():
 	# print current card deck after drawing hand
 	print "\n"
 	marriage.print_deck()
+	
+	print "\n"
+	for ahand in range(len(marriage.hands)):
+	  print "hand has %s cards" % len(marriage.hands[ahand].cards)
 
 	# print unsorted hands
 	print "\n"
