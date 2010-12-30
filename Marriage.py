@@ -4,11 +4,16 @@
 from sys import exit
 from random import shuffle
 
+#let them be global vars
+cards_to_deal = 21
+max_players  = 6
+
 class Marriage:
 
+  
 	def __init__(self, num_of_players):
 		self.num_of_players = num_of_players
-		self.hand = [0,0,0,0,0,0] # Six Players Max
+		self.hand = [0]* num_of_players
 		rs = [suit + rank for suit in "CDHS" for rank in "A23456789TJQK"]
 		self.cards_list = rs * 3
 
@@ -29,9 +34,8 @@ class Marriage:
 		since object cards_list is by reference, it will change too
 		return a list of n cards
 		"""
-		n = 21 
 		shuffle(self.cards_list)
-		return [self.cards_list.pop() for k in range(n)]
+		return [self.cards_list.pop() for k in range(cards_to_deal)]
 
 	def draw_hands(self):
 		for i in range(0, self.num_of_players):
@@ -44,7 +48,7 @@ class Marriage:
 def main():
 	# display error and exit game if invalid number of players
 	num_of_players = input("How many players do we have? (1-6) ")
-	if not ( num_of_players > 0 and num_of_players < 7):
+	if not ( num_of_players > 0 and num_of_players < (max_players +1)):
 		print "Number of players must be 1-6!"
 		exit()
 
