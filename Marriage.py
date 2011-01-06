@@ -24,7 +24,7 @@ class Card(object):
   
   suit_names = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
   rank_names = [None, 'Ace', '2', '3', '4', '5', '6', '7','8', '9', '10', 'Jack', 'Queen', 'King']
-    
+  
   def __init__(self, suit=0, rank=2):
     self.suit = suit 
     self.rank = rank
@@ -38,7 +38,6 @@ class Card(object):
     return cmp(t1, t2)
 
 
-
 class Deck(object):
   def __init__(self, times=1): 
     self.cards = []
@@ -47,7 +46,6 @@ class Deck(object):
         card = Card(suit, rank)
         self.cards.append(card)
     self.cards = self.cards * times
-    
         
   def move_cards(self, hand, num): 
     for i in range(num):
@@ -68,10 +66,56 @@ class Deck(object):
   def shuffle(self): 
     shuffle(self.cards)
 
+
 class Hand(Deck):
+  
+  
   def __init__(self): 
     self.cards = []
+    
+  def is_tanela(self,lst):
+    """lst is a list of cards"""
+    return len(lst)==3 and all(l == lst[0] for l in lst[1:])
+
+  def is_threeofkind(self, lst):
+    """lst is a list of cards
+    looks ugly but is safe since the list should only have 3 elements
+    """
+    return len(lst)==3 and all(c.rank == lst[0].rank for c in lst[1:]) and lst[0].suit != lst[1].suit != lst[2].suit
+
+  def is_doublerun(self,lst):
+    """lst is a list of cards"""
+    
+  def as_dict(self):
+    dict = {}
+    for card in self.cards:
+      if (card.suit,card.rank) in dict:
+        dict[(card.suit, card.rank)] += 1
+      else:
+        dict[(card.suit, card.rank)] = 1
+    return dict
+    
+  def detecttanela(self):
+    dict = self.as_dict()
+    return [Card(key[0],key[1]) for key in dict if  dict[key] == 3]
+
+  def detectthreeofakind():
+    filter()
+    cards
+    
+  def detectcombos():
+    """returns a list of combo objs"""
+
+class Combo(Deck):
+  """
+  types of combos
+    three of a kind :: like Spades 5, Diamonds 5 and Clubs 5
+    tanela :: like 3 Spades 5
+    run :: like Spades 4, Hearts 5, Diamonds 6
+    double run :: like Spades A, Spades 2, Spades 3
+  """
   
+
 class Marriage:
 	def __init__(self, num_of_players):
 		self.num_of_players = num_of_players
@@ -148,6 +192,14 @@ def main():
 	print "\n"
 	print "Sorted hands"
 	marriage.print_hands()
+
+#for testing purposes...
+m = Marriage(4)
+m.draw_hands()
+m.sort_hands()
+h = m.hands[0]
+
+
 
 if __name__ == '__main__':
 	main()
