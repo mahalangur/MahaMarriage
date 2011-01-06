@@ -100,8 +100,9 @@ class Hand(Deck):
     return [Card(key[0],key[1]) for key in dict if  dict[key] == 3]
 
   def detectthreeofakind():
-    filter()
-    cards
+    dict = self.as_dict()
+#    for n in range(13):  # is safe coz no. of ranks never increase
+#      for m in [c for k in dict if k[1] == n] # return a row of cards of the same rank
     
   def detectcombos():
     """returns a list of combo objs"""
