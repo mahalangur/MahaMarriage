@@ -80,6 +80,7 @@ class Hand(Deck):
   def is_threeofkind(self, lst):
     """lst is a list of cards
     looks ugly but is safe since the list should only have 3 elements
+    TODO: make it possible to have fourof a kind.
     """
     return len(lst)==3 and all(c.rank == lst[0].rank for c in lst[1:]) and lst[0].suit != lst[1].suit != lst[2].suit
 
@@ -98,23 +99,49 @@ class Hand(Deck):
   def detecttanela(self):
     dict = self.as_dict()
     return [Card(key[0],key[1]) for key in dict if  dict[key] == 3]
+    
+  def showruns(self, lst, n):
+    """
+      shows a list of at least n consecutive numbers in any array
+      self.showruns([1,2,3,5,6,7,8,9,11],3) => [[1,2,3],[5,6,7,8,9]]
+      
+      not efficient but works
+    """
+    ret = []
+    help = self.showarrayrun_helper([],lst,n) 
+    while True:
+      if help[0]:
+        ret.append(help[0])
+      if not help[1]:
+        break
+      else:
+        help = self.showarrayrun_helper([],help[1],n)
+    return ret
 
-  def detectthreeofakind():
+  def showruns_helper(self, acc, lst, len):
+    if lst and (not acc or (acc[-1]+1 == lst[0])):
+        return self.showarrayrun_helper(acc+lst[0:1], lst[1:], len - 1)
+    else:
+        return ([],lst) if len > 0 else (acc,lst)
+
+  def detectthreeofakind(self):
     dict = self.as_dict()
-#    for n in range(13):  # is safe coz no. of ranks never increase
-#      for m in [c for k in dict if k[1] == n] # return a row of cards of the same rank
+    ret = []
+    for n in range(13):  # is safe coz no. of ranks never increase
+      lst = [k for k in dict if k[1] == n] # return a row of unique cards of the same rank
+      if len(lst)>2:
+        ret.append(lst)
+    return ret
+    
+  def detectdoublerun():
+    dict = self.as_dict()
+    ret = []
+    for n in range(4): # should be safe since suits never increase
+      lst = [k[1] for k in dict if k[0] ==n].sort() #returns a row of unique rank of the same suit
+      ret.append([Card(n,r) for r in self.showruns(lst)]
     
   def detectcombos():
     """returns a list of combo objs"""
-
-class Combo(Deck):
-  """
-  types of combos
-    three of a kind :: like Spades 5, Diamonds 5 and Clubs 5
-    tanela :: like 3 Spades 5
-    run :: like Spades 4, Hearts 5, Diamonds 6
-    double run :: like Spades A, Spades 2, Spades 3
-  """
   
 
 class Marriage:
