@@ -77,14 +77,7 @@ class Hand(Deck):
     """lst is a list of cards"""
     return len(lst)==3 and all(l == lst[0] for l in lst[1:])
 
-  def is_threeofkind(self, lst):
-    """lst is a list of cards
-    looks ugly but is safe since the list should only have 3 elements
-    TODO: make it possible to have fourof a kind.
-    """
-    return len(lst)==3 and all(c.rank == lst[0].rank for c in lst[1:]) and lst[0].suit != lst[1].suit != lst[2].suit
-
-  def is_doublerun(self,lst):
+  def is_puresequence(self,lst):
     """lst is a list of cards"""
     
   def as_dict(self):
@@ -123,17 +116,8 @@ class Hand(Deck):
         return self.showarrayrun_helper(acc+lst[0:1], lst[1:], len - 1)
     else:
         return ([],lst) if len > 0 else (acc,lst)
-
-  def detectthreeofakind(self):
-    dict = self.as_dict()
-    ret = []
-    for n in range(13):  # is safe coz no. of ranks never increase
-      lst = [k for k in dict if k[1] == n] # return a row of unique cards of the same rank
-      if len(lst)>2:
-        ret.append(lst)
-    return ret
     
-  def detectdoublerun():
+  def detectpuresequence():
     dict = self.as_dict()
     ret = []
     for n in range(4): # should be safe since suits never increase
