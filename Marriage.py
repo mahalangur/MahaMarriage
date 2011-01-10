@@ -55,7 +55,7 @@ class Deck(object):
     res=[]
     for card in self.cards:
       res.append(str(card))
-    return '\n'.join(res)
+    return '\t'.join(res)
     
   def pop_card(self):
     return self.cards.pop()
@@ -69,17 +69,18 @@ class Deck(object):
 
 class Hand(Deck):
   
+
   
   def __init__(self): 
     self.cards = []
-    
+  
   def is_tanela(self,lst):
     """lst is a list of cards"""
     return len(lst)==3 and all(l == lst[0] for l in lst[1:])
 
   def is_puresequence(self,lst):
     """lst is a list of cards"""
-    
+
   def as_dict(self):
     dict = {}
     for card in self.cards:
@@ -116,17 +117,17 @@ class Hand(Deck):
         return self.showarrayrun_helper(acc+lst[0:1], lst[1:], len - 1)
     else:
         return ([],lst) if len > 0 else (acc,lst)
-    
-  def detectpuresequence():
+        
+  def detectpuresequence(self):
     dict = self.as_dict()
     ret = []
     for n in range(4): # should be safe since suits never increase
-      lst = [k[1] for k in dict if k[0] ==n].sort() #returns a row of unique rank of the same suit
-      ret.append([Card(n,r) for r in self.showruns(lst)]
-    
+      lst = [k[1] for k in dict if k[0] ==n].sort() # returns a row of unique rank of the same suit
+      ret.append([Card(n,r) for r in self.showruns(lst)])
+    return ret
+  
   def detectcombos():
     """returns a list of combo objs"""
-  
 
 class Marriage:
 	def __init__(self, num_of_players):
