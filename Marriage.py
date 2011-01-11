@@ -24,7 +24,7 @@ class Card(object):
   
   suit_names = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
   rank_names = [None, 'Ace', '2', '3', '4', '5', '6', '7','8', '9', '10', 'Jack', 'Queen', 'King']
-    
+  
   def __init__(self, suit=0, rank=2):
     self.suit = suit 
     self.rank = rank
@@ -43,7 +43,6 @@ class Card(object):
     return t1 < t2
     
 
-
 class Deck(object):
   def __init__(self, times=1): 
     self.cards = []
@@ -52,7 +51,6 @@ class Deck(object):
         card = Card(suit, rank)
         self.cards.append(card)
     self.cards = self.cards * times
-    
         
   def move_cards(self, hand, num): 
     for i in range(num):
@@ -62,7 +60,7 @@ class Deck(object):
     res=[]
     for card in self.cards:
       res.append(str(card))
-    return '\n'.join(res)
+    return '\t'.join(res)
     
   def pop_card(self):
     return self.cards.pop()
@@ -73,10 +71,69 @@ class Deck(object):
   def shuffle(self): 
     shuffle(self.cards)
 
+
 class Hand(Deck):
+
   def __init__(self): 
     self.cards = []
+
+  def as_dict(self):
+   dict = {}
+   for card in self.cards:
+     if (card.suit,card.rank) in dict:
+       dict[(card.suit, card.rank)] += 1
+     else:
+       dict[(card.suit, card.rank)] = 1
+   return dict
+
+  def is_tanela(self,lst):
+    """lst is a list of cards"""
+    return len(lst)==3 and all(l == lst[0] for l in lst[1:])
+
+  def is_puresequence(self,lst):
+    """lst is a list of cards"""
+    
+  def detecttanela(self):
+    dict = self.as_dict()
+    return [Card(key[0],key[1]) for key in dict if  dict[key] == 3]
+        
+  def detectpuresequence(self):
+    dict = self.as_dict()
+    ret = []
+    for n in range(4): # should be safe since suits never increase
+      lst = [k[1] for k in dict if k[0] ==n].sort() # returns a row of unique rank of the same suit
+      ret.append([Card(n,r) for r in self.showruns(lst)])
+    return ret
   
+  def detectcombos():
+    """returns a list of combo objs"""
+
+
+#utility fns maybe refactor later?
+  def showruns(self, lst, n):
+    """
+      shows a list of at least n consecutive numbers in any array
+      self.showruns([1,2,3,5,6,7,8,9,11],3) => [[1,2,3],[5,6,7,8,9]]
+
+      not efficient but works
+    """
+    ret = []
+    help = self.showarrayrun_helper([],lst,n) 
+    while True:
+      if help[0]:
+        ret.append(help[0])
+      if not help[1]:
+        break
+      else:
+        help = self.showarrayrun_helper([],help[1],n)
+    return ret
+
+  def showruns_helper(self, acc, lst, len):
+    if lst and (not acc or (acc[-1]+1 == lst[0])):
+        return self.showarrayrun_helper(acc+lst[0:1], lst[1:], len - 1)
+    else:
+        return ([],lst) if len > 0 else (acc,lst)
+
 class Marriage:
 	def __init__(self, num_of_players):
 		self.num_of_players = num_of_players
@@ -153,6 +210,14 @@ def main():
 	print("\n")
 	print( "Sorted hands")
 	marriage.print_hands()
+
+#for testing purposes...
+m = Marriage(4)
+m.draw_hands()
+m.sort_hands()
+h = m.hands[0]
+
+
 
 if __name__ == '__main__':
 	main()
