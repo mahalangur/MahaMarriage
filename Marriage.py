@@ -37,6 +37,11 @@ class Card(object):
     t2 = other.suit, other.rank 
     return cmp(t1, t2)
 
+  def __lt__(self, other):
+    t1 = self.suit, self.rank 
+    t2 = other.suit, other.rank 
+    return t1 < t2
+    
 
 
 class Deck(object):
@@ -82,14 +87,14 @@ class Marriage:
 		
 
 	def print_deck(self):
-		print "Deck: %s" % self.deck
-		print "Total Cards = %s cards" % len(self.deck.cards)
+		print ("Deck:", self.deck)
+		print("Total Cards = ", len(self.deck.cards), " cards")
 
 	def print_hands(self):
 		for ahand in self.hands:
-		  print '-' * 80
-		  print ahand
-		  print '-' * 80
+		  print ('-' * 80)
+		  print (ahand)
+		  print ('-' * 80)
 
 	def draw_hands(self):
 		"""
@@ -108,45 +113,45 @@ class Marriage:
 
 def main():
 	# display error and exit game if invalid number of players
-	num_of_players = input("How many players do we have? (1-6) ")
+	num_of_players = int(input("How many players do we have? (1-6)"))
 	if not ( num_of_players > 0 and num_of_players < (max_players +1)):
-		print "Number of players must be 1-6!"
+		print ("Number of players must be 1-6!")
 		exit()
 
 	# Create instance of Marriage class
 	marriage = Marriage(num_of_players)
 	
-	print "\n"
-	print " %s hands created " % len(marriage.hands)
+	print("\n")
+	print (len(marriage.hands), "hands created " )
 
 	# print current card deck
-	print "\n"
+	print("\n")
 	marriage.print_deck()
 
 	# draw hands
-	print "\n"
-	print "Drawing hands........."
+	print("\n")
+	print( "Drawing hands.........")  
 	marriage.draw_hands()
 
 	# print current card deck after drawing hand
-	print "\n"
+	print("\n")
 	marriage.print_deck()
 	
-	print "\n"
+	print("\n")
 	for ahand in range(len(marriage.hands)):
-	  print "hand has %s cards" % len(marriage.hands[ahand].cards)
+	  print("hand has ",len(marriage.hands[ahand].cards) , " cards")
 
 	# print unsorted hands
-	print "\n"
-	print "Unsorted hands"
+	print("\n")
+	print ("Unsorted hands")
 	marriage.print_hands()
 
 	# sort hands
 	marriage.sort_hands()
 
 	# print sorted hands
-	print "\n"
-	print "Sorted hands"
+	print("\n")
+	print( "Sorted hands")
 	marriage.print_hands()
 
 if __name__ == '__main__':
