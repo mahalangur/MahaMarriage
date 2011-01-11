@@ -1,0 +1,33 @@
+
+
+Soo... this is how the game engine should work.
+
+First you distribute all the cards and it's the turn of player 1
+
+0. if any player has a tanela, he should show it.
+
+
+1. player1 gets a choice of taking the top card or choosing another.
+
+2. player1 should first choose to throw a card.
+
+3. then player1 can either choose the top card or the one below it.
+
+4. player2 first throws a card
+
+5. player2 can either choose the card player1 threw or choose one from the deck
+
+6. player3 first throws a card
+
+7. player3 can either choose the card player2 threw or choose one from the deck
+
+... this goes on until....
+
+8. if playerX has three sequences, he shows them and then draws the joker. After viewing the joker, playerX can use the joker in between sequences.
+
+10. if playerY also gets three sequences, he shows them and can see the joker.
+
+....this goes on until....
+
+11. one player gets all the sequences right. then he shows his cards. and then the points are calculated afterwards.
+
