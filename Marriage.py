@@ -72,7 +72,7 @@ class Hand(Deck):
   def __init__(self): 
     self.cards = []
 
- def as_dict(self):
+  def as_dict(self):
    dict = {}
    for card in self.cards:
      if (card.suit,card.rank) in dict:
