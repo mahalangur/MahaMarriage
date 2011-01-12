@@ -1,33 +1,68 @@
+Just wanted to throw an idea out there and see if people are interested.
 
+Marriage is a card game which is pretty popular in our society (especially around dashain time). As an exercise I’ve been playing with the idea of actually creating a game.
+note that someone else has already come up with the game (works in internet explorer only Come again? ) but I havent yet been able to play it for myself.
 
-Soo... this is how the game engine should work.
+My aim is not just project completion, but also, first of all, to get people to collaborate on our very first project. We shall see how things go. First and foremost is to see if we can stick it together as a team.
 
-First you distribute all the cards and it's the turn of player 1
+A little bit about the project. An informal specification :
+Its gonna be a web-app hosted on this very site (probably under subdomain).
+we are going to use our github page for code distribution.
+distributed under an “open” license with credits to the Mahalangur team.
+probability of using Facebook connect.
+target mobile users (iPhone and Android)
+technology required: HTML5, JavaScript, CSS3
 
-0. if any player has a tanela, he should show it.
+I found a really nice page with all the rules of the game, but for our ease, I will also paste that here:
 
+About the game
 
-1. player1 gets a choice of taking the top card or choosing another.
+This game is comprised of two to six players. The deck consists of three packs of cards.
 
-2. player1 should first choose to throw a card.
+Tunnela: If you have three of the same card, you have a tunnela: 2 of hearts, 2 of hearts, and 2 of hearts. Note: 2 of hearts, 2 of hearts, and 2 of spades is not a tunnela.
+If a player has three tunnelas say 3 Ace of Hearts, 3 Kings of Spades and 3 Jacks of Club i.e, during initial card distribution, he would be announced the winner.
 
-3. then player1 can either choose the top card or the one below it.
+Pure Sequence: If you have three cards of same suite and in a series, you have is a pure sequence: 7 of diamonds, 8 of diamonds, and 9 of diamonds. 1 (Ace) of clubs, 12 (Queen) of clubs, and 13 (King) of clubs is also a pure sequence. Note: 3 of spades, 4 of spades, and 5 of hearts is not a pure sequence.
 
-4. player2 first throws a card
+Jokers: Any card can be a joker. The joker is decided at the beginning of play. Other cards that are jokers are:
+Tiplu: Same card as that of the joker.
+Poplu : The card just above the Tiplu. If the 7 of diamonds is the Tiplu, the 8 of diamonds is called the Poplu. If the Tiplu is the 1 (Ace) of clubs, the Poplu is the 2 of clubs. If the Tiplu is the 13 (King) of spades, the Poplu is the 1 (Ace) of spades.
+Jhiplu: The card just below the Tiplu. If the 7 of diamonds is the Tiplu, the 6 of diamonds is called the Jhiplu. If the Tiplu is the 1 (Ace) of clubs, the Jhiplu is the 13 (King) of clubs. If the Tiplu is the 13 (King) of spades, the Jhiplu is the 12 (Queen) of spades.
+Ordinary Jokers: If the 11 (Jack) of hearts is the joker, all the 11s (Jacks) are ordinary jokers. The 10 of hearts is the Jhiplu, the 12 (Queen) of hearts is the Poplu, and the 11 (Jack) of hearts is the Tiplu.
+Marriage: If you have a Jhiplu, a Tiplu, and a Poplu, you have a marriage. If the Jhiplu, Tiplu, and Poplu are taken as a marriage, they would not carry individual points but the marriage (that is, the set of Jhiplu, Tiplu, and Poplu) will carry the points. Two Jhiplus, two Tiplus, and two Poplus will form a double marriage. A Double Marriage would end the game instantly making the player with it the winner.
 
-5. player2 can either choose the card player1 threw or choose one from the deck
+Playing Marriage
 
-6. player3 first throws a card
+First of all, the computer deals cards to all of the players. A player would be selected as the dealer randomly. There after the cards are distributed clockwise. After each game. The dealership too would be passed clockwise to other players. After the hands are distributed, first card on the deck would be flipped (called the Choice Card ) .The adjacent user clockwise has the option to either take this card or choose another from the deck.
 
-7. player3 can either choose the card player2 threw or choose one from the deck
+After he chooses another card this card must go to some sort of bin. Where users can see what card has been thrown but cannot pick from here. After the choice card, each user has the option to either choose the card thrown by another adjacent user or choose one from the deck. 
 
-... this goes on until....
+This goes on until the game is finished. 
 
-8. if playerX has three sequences, he shows them and then draws the joker. After viewing the joker, playerX can use the joker in between sequences.
+If all the cards in the deck are finished and still the game doesn’t end. All the card except for the last one gets shuffled and the choice deck is re-built. The joker is not set by individual players as in the usual game, but the joker is set by the computer via simply taking a random number between 1 and 521. 
 
-10. if playerY also gets three sequences, he shows them and can see the joker.
+Each player has 21 cards that s/he can play with. The joker can only be seen by those players who have at least three pure sequences. 
 
-....this goes on until....
+Note: Here, “pure sequence” means either the tunnela or the real pure sequence. The three sets of pure sequences can be two tunnelas and one pure sequence, or three tunnelas all by themselves [2], or one tunnela and two pure sequences, or all three pure sequences. Whatever the combination, the total number of sequences should be three, each sequence consisting of 3 or more cards. 
 
-11. one player gets all the sequences right. then he shows his cards. and then the points are calculated afterwards.
+During the play, each player’s goal should be to make the maximum number of sets (at least three cards in a set), The set can be a pure sequence, a tunnela, a dirty sequence (two cards having the same suite and in a series and one joker), triplet, a four of a kind (with no repeating suits) or a dirty triplet. 
 
+Dirty sequence and dirty triplet can only be made after seeing the joker. Whoever makes the fastest sets of cards first wins the game. The game ends with extra card in the hand that would be blinded .
+A dirty sequence can be two cards having the same suit, in a series, and one joker. One card and two jokers can also be a dirty sequence.
+A dirty triplet can be two cards having the same number and one joker. One card and two jokers can also be a dirty triplet. There is no difference between a dirty triplet and a dirty sequence with two jokers each.
+A triplet is a combination of three cards of the same number but with different suits. The 7 of diamonds, 7 of clubs, and 7 of spades is a triplet. But, the 7 of diamonds, 7 of diamonds, and 7 of spades cannot be a triplet.
+A dirty triplet can be a joker plus two other cards having the same number but of different suits; for example, the joker, 7 of diamonds, and 7 of clubs. But, the joker, 7 of diamonds, and 7 of diamonds cannot be a dirty triplet.
+unnelas cannot be made using a joker.
+If there are two players who have seen the joker and a player who has seen the joker mistakenly throws a joker, that particular card would be blinded. In reality a player would not ever toss a joker in the ground unless he is playing a very very strategic game.
+[1] It could be kept optional, and the player who grounds the first 3 set of complete pure sequence can be provided with the opportunity to create the joker.
+[2] If three tunnelas appear after the game has begun and the player has drawn and thrown cards , his tunnelas would be considered void.
+[3] Tunnelas needs to be grounded before the user draws his first card after the game has begun.
+
+Doubles:
+A doulble is a set of two card of same suits ( say 2 Ace of hearts). Marriage is also played with doubles in the game. If a player has 8 sets of doubles in his hand before any other player have grounded their valid sequence. The layer would be announced winner of the game. If a player manages to create 7 sets of doubles during a game play . He is allowed to see the joker. But all his doubles would be grounded. The eighth sets makes him the winner and also adds points to his account.
+
+We can decide on the point calculation or just use that nice guy’s point table.
+
+Anyways, just something I thought we could start off with.
+
+Comments please.
